@@ -1,7 +1,7 @@
 import React from 'react';
 
-import LobbyScreen from '@screens/Auth/Lobby/LobbyScreen';
+import LoginScreen from '@screens/Auth/Login';
 
 export default function App() {
-  return <LobbyScreen />;
+  return <LoginScreen />;
 }
