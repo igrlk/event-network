@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "server": "cd server && npm start",
+    "app": "cd app && npm start"
+  },
   "lint-staged": {
     "src/**/*.{js,jsx}": [
       "prettier --write",
