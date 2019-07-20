@@ -26,6 +26,6 @@
     "lint-staged": "8.2.1"
   },
   "dependencies": {
-    "babel-plugin-module-resolver": "^3.2.0"
+    "babel-plugin-module-resolver": "3.2.0"
   }
 }

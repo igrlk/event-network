@@ -9,6 +9,7 @@ module.exports = {
         alias: {
           '@screens': './src/screens',
           '@api': './src/library/api',
+          '@components': './src/library/common/commonComponents',
         },
       },
     ],
