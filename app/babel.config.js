@@ -10,6 +10,7 @@ module.exports = {
           '@screens': './src/screens',
           '@api': './src/library/api',
           '@components': './src/library/common/commonComponents',
+          '@utilities': './src/library/utilities',
         },
       },
     ],

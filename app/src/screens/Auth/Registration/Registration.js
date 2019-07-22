@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, ActivityIndicator, TextInput } from 'react-native';
-import { Actions } from 'react-native-router-flux';
 
 import { register } from '@api/auth';
+import { setToken } from '@utilities/token';
+import { resetNavigation } from '@utilities/navigator';
 import Button from '@components/Button';
 
-export default function Registration() {
+export default function Registration({ navigation }) {
   const [isLoading, setIsLoading] = useState(false);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -14,9 +15,10 @@ export default function Registration() {
   const requestRegistration = async () => {
     setIsLoading(true);
     try {
-      const result = await register({ name, email, password });
-      Actions.home();
-      console.log(result);
+      const { token } = await register({ name, email, password });
+
+      setToken(token);
+      resetNavigation('Home');
     } catch (ex) {
       console.error(ex);
     } finally {
@@ -60,7 +62,8 @@ const styles = StyleSheet.create({
     flex: 1,
     display: 'flex',
     alignItems: 'center',
-    paddingTop: 100,
+    paddingTop: 40,
+    backgroundColor: '#ff5722',
   },
   form: {
     width: 300,

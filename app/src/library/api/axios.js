@@ -5,4 +5,6 @@ const axiosInstance = Axios.create({
   headers: { 'Content-Type': 'application/json' },
 });
 
+axiosInstance.interceptors.response.use(({ data }) => data, Promise.reject);
+
 export default axiosInstance;

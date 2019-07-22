@@ -1,21 +1,23 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, ActivityIndicator, TextInput } from 'react-native';
-import { Actions } from 'react-native-router-flux';
 
 import { login } from '@api/auth';
+import { setToken } from '@utilities/token';
+import { resetNavigation } from '@utilities/navigator';
 import Button from '@components/Button';
 
 export default function Login() {
   const [isLoading, setIsLoading] = useState(false);
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('Wefwef@mail.ru');
+  const [password, setPassword] = useState('123456');
 
   const requestLogin = async () => {
     setIsLoading(true);
     try {
-      const result = await login({ email, password });
-      Actions.home();
-      console.log(result);
+      const { token } = await login({ email, password });
+
+      setToken(token);
+      resetNavigation('Home');
     } catch (ex) {
       console.error(ex);
     } finally {
@@ -57,7 +59,8 @@ const styles = StyleSheet.create({
     flex: 1,
     display: 'flex',
     alignItems: 'center',
-    paddingTop: 100,
+    paddingTop: 40,
+    backgroundColor: '#ff5722',
     backgroundColor: '#ff5722',
   },
   form: {
