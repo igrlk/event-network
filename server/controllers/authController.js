@@ -5,7 +5,7 @@ const User = require('../models/user');
 const settings = require('../common/settings');
 
 module.exports.registration = async (req, res) => {
-  errors = [];
+  const errors = [];
 
   try {
     const { name, email, password } = req.body;
@@ -57,7 +57,7 @@ module.exports.registration = async (req, res) => {
 };
 
 module.exports.login = async (req, res) => {
-  errors = [];
+  const errors = [];
 
   try {
     const { email, password } = req.body;
