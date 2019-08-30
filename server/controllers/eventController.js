@@ -1,9 +1,35 @@
 const Event = require('../models/event');
 
-module.exports.getEvents = async (req, res) => {
+module.exports.getUserEvents = async (req, res) => {
   const errors = [];
   try {
     const events = await req.user.getEvents();
+    res.send(events);
+  } catch (err) {
+    errors.push({ error: err.toString() });
+    res.status(400).send({ errors });
+  }
+};
+
+module.exports.getEvent = async (req, res) => {
+  const errors = [];
+  try {
+    const event = await Event.findByPk(req.params.id);
+
+    if (!event) {
+      res.send(404);
+    }
+    res.send(event);
+  } catch (err) {
+    errors.push({ error: err.toString() });
+    res.status(400).send({ errors });
+  }
+};
+
+module.exports.getEvents = async (req, res) => {
+  const errors = [];
+  try {
+    const events = await Event.findAll();
     res.send(events);
   } catch (err) {
     errors.push({ error: err.toString() });

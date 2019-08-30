@@ -1,13 +1,13 @@
 const authRoutes = require('./authRoutes');
 const eventRoutes = require('./eventRoutes');
+const usersRoutes = require('./usersRoutes');
 const User = require('../models/user');
 
 module.exports = app => {
   app.use('/auth', authRoutes);
-
-  app.use('', addUserToRequest);
-
+  app.use('/', addUserToRequest);
   app.use('/events', eventRoutes);
+  app.use('/users', usersRoutes);
 };
 
 async function addUserToRequest(req, res, next) {
