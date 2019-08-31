@@ -4,25 +4,17 @@ const jwt = require('jsonwebtoken');
 const sequelize = require('../common/database');
 const settings = require('../common/settings');
 
-const User = sequelize.define(
-  'user',
-  {
-    id: {
-      type: Sequelize.INTEGER,
-      autoIncrement: true,
-      allowNull: false,
-      primaryKey: true,
-    },
-    password: Sequelize.STRING,
-    name: Sequelize.STRING,
-    email: Sequelize.STRING,
+const User = sequelize.define('user', {
+  id: {
+    type: Sequelize.INTEGER,
+    autoIncrement: true,
+    allowNull: false,
+    primaryKey: true,
   },
-  {
-    defaultScope: {
-      attributes: { exclude: ['password'] },
-    },
-  },
-);
+  password: Sequelize.STRING,
+  name: Sequelize.STRING,
+  email: Sequelize.STRING,
+});
 
 User.findByToken = async token => {
   try {

@@ -9,7 +9,7 @@ import Button from '@components/Button';
 export default function Login() {
   const [isLoading, setIsLoading] = useState(false);
   const [email, setEmail] = useState('Wefwef@mail.ru');
-  const [password, setPassword] = useState('123456');
+  const [password, setPassword] = useState('123123');
 
   const requestLogin = async () => {
     setIsLoading(true);
@@ -37,6 +37,7 @@ export default function Login() {
             style={styles.input}
             value={email}
             onChangeText={setEmail}
+            autoCapitalize='none'
           />
           <Text style={styles.label}>Password</Text>
           <TextInput
@@ -44,6 +45,7 @@ export default function Login() {
             style={styles.input}
             value={password}
             onChangeText={setPassword}
+            autoCapitalize='none'
           />
           <Button style={styles.button} onPress={requestLogin}>
             Log in

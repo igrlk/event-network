@@ -8,7 +8,7 @@ Button.defaultProps = {
 
 export default function Button({ children, onPress, style }) {
   return (
-    <TouchableOpacity style={{ ...styles.button, ...style }} onPress={onPress}>
+    <TouchableOpacity style={{ ...styles.button, ...style }} onPress={onPress || (() => {})}>
       <Text style={styles.buttonText}>{children}</Text>
     </TouchableOpacity>
   );

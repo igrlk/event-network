@@ -19,3 +19,8 @@ export const checkForToken = async () => {
 
   return false;
 };
+
+export const removeToken = async () => {
+  delete axios.defaults.headers.common['Authorization'];
+  return AsyncStorage.removeItem(name);
+};

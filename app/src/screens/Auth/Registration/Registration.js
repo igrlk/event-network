@@ -8,9 +8,9 @@ import Button from '@components/Button';
 
 export default function Registration({ navigation }) {
   const [isLoading, setIsLoading] = useState(false);
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [name, setName] = useState('qwe');
+  const [email, setEmail] = useState('Wefwef@mail.ru');
+  const [password, setPassword] = useState('123123');
 
   const requestRegistration = async () => {
     setIsLoading(true);
@@ -33,13 +33,19 @@ export default function Registration({ navigation }) {
       ) : (
         <View style={styles.form}>
           <Text style={styles.label}>Name</Text>
-          <TextInput style={styles.input} value={name} onChangeText={setName} />
+          <TextInput
+            style={styles.input}
+            value={name}
+            onChangeText={setName}
+            autoCapitalize='none'
+          />
           <Text style={styles.label}>Email</Text>
           <TextInput
             textContentType='emailAddress'
             style={styles.input}
             value={email}
             onChangeText={setEmail}
+            autoCapitalize='none'
           />
           <Text style={styles.label}>Password</Text>
           <TextInput
@@ -47,6 +53,7 @@ export default function Registration({ navigation }) {
             style={styles.input}
             value={password}
             onChangeText={setPassword}
+            autoCapitalize='none'
           />
           <Button style={styles.button} onPress={requestRegistration}>
             Log in

@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, ActivityIndicator, TextInput } from 'react-native';
 
 import { getEvents } from '@api/events';
+import Button from '@components/Button';
 
-export default function Home() {
+export default function Home({ navigation }) {
   const [isLoading, setIsLoading] = useState(false);
   const [events, setEvents] = useState([]);
   useEffect(() => {
@@ -13,6 +14,7 @@ export default function Home() {
       setIsLoading(true);
       try {
         setEvents(await getEvents());
+        console.log(events);
       } catch (ex) {
         console.log(ex);
       } finally {
@@ -23,13 +25,21 @@ export default function Home() {
 
   return (
     <View style={styles.container}>
-      {isLoading ? (
-        <ActivityIndicator />
-      ) : (
-        <View style={styles.form}>
-          <Text style={styles.label}>Home</Text>
-        </View>
-      )}
+      <View style={styles.form}>
+        {isLoading ? (
+          <ActivityIndicator />
+        ) : (
+          <>
+            <Button style={styles.button} onPress={() => navigation.navigate('EventCreating')}>
+              Create event
+            </Button>
+            <Button style={styles.button} onPress={() => navigation.navigate('EventSearching')}>
+              Find events
+            </Button>
+            {events.length === 0 && <Text style={styles.label}>You have no events...</Text>}
+          </>
+        )}
+      </View>
     </View>
   );
 }
@@ -61,6 +71,8 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 6,
     color: '#fff',
+    marginBottom: 10,
+    marginTop: 20,
   },
   button: {
     width: '100%',
@@ -69,6 +81,15 @@ const styles = StyleSheet.create({
     padding: 10,
     display: 'flex',
     alignItems: 'center',
-    marginTop: 20,
+    marginBottom: 20,
+  },
+  youCanText: {
+    color: '#fff',
+    fontSize: 17,
+    marginTop: 10,
+  },
+  youCanTextLink: {
+    fontSize: 17,
+    color: '#ececec',
   },
 });

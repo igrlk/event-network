@@ -6,6 +6,8 @@ import Registration from '@screens/Auth/Registration';
 import Login from '@screens/Auth/Login';
 import Home from '@screens/Home';
 
+import { removeToken } from '@utilities/token';
+
 const AppStackNavigator = createStackNavigator(
   {
     Lobby,
