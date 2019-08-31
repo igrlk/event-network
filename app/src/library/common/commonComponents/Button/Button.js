@@ -1,5 +1,7 @@
 import React from 'react';
-import { Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { Text, TouchableOpacity } from 'react-native';
+
+import styles from './buttonStyles';
 
 Button.defaultProps = {
   onPress: () => {},
@@ -13,18 +15,3 @@ export default function Button({ children, onPress, style }) {
     </TouchableOpacity>
   );
 }
-
-const styles = StyleSheet.create({
-  button: {
-    width: '100%',
-    borderRadius: 5,
-    backgroundColor: '#fff',
-    padding: 10,
-    display: 'flex',
-    alignItems: 'center',
-  },
-  buttonText: {
-    fontSize: 18,
-    fontWeight: 'bold',
-  },
-});

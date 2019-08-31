@@ -1,14 +1,18 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, ActivityIndicator, TextInput } from 'react-native';
+import { View, Text, ActivityIndicator, ImageBackground } from 'react-native';
 
 import { login } from '@api/auth';
 import { setToken } from '@utilities/token';
 import { resetNavigation } from '@utilities/navigator';
 import Button from '@components/Button';
+import Input from '@components/Input';
+import authBackground from '@images/backgrounds/auth.jpg';
 
-export default function Login() {
+import styles from './loginStyles';
+
+export default function Login({ navigation }) {
   const [isLoading, setIsLoading] = useState(false);
-  const [email, setEmail] = useState('Wefwef@mail.ru');
+  const [email, setEmail] = useState('iluchenkov@gmail.com');
   const [password, setPassword] = useState('123123');
 
   const requestLogin = async () => {
@@ -26,72 +30,36 @@ export default function Login() {
   };
 
   return (
-    <View style={styles.container}>
-      {isLoading ? (
-        <ActivityIndicator />
-      ) : (
-        <View style={styles.form}>
-          <Text style={styles.label}>Email</Text>
-          <TextInput
-            textContentType='emailAddress'
-            style={styles.input}
-            value={email}
-            onChangeText={setEmail}
-            autoCapitalize='none'
-          />
-          <Text style={styles.label}>Password</Text>
-          <TextInput
-            secureTextEntry
-            style={styles.input}
-            value={password}
-            onChangeText={setPassword}
-            autoCapitalize='none'
-          />
-          <Button style={styles.button} onPress={requestLogin}>
-            Log in
-          </Button>
-        </View>
-      )}
-    </View>
+    <ImageBackground source={authBackground} style={styles.containerBackground}>
+      <View style={styles.container}>
+        <Text style={styles.title}>Event Network</Text>
+        {isLoading ? (
+          <ActivityIndicator />
+        ) : (
+          <View style={styles.formContainer}>
+            <View style={styles.form}>
+              <View style={styles.formLabels}>
+                <Text style={styles.label}>
+                  <Text>E-MAIL:</Text>
+                </Text>
+                <Text style={styles.label}>
+                  <Text>PASSWORD:</Text>
+                </Text>
+              </View>
+              <View style={styles.formInputs}>
+                <Input value={email} onChange={setEmail} type='email' />
+                <Input value={password} onChange={setPassword} type='password' />
+              </View>
+            </View>
+            <Button onPress={requestLogin}>LOG IN</Button>
+            <View style={styles.buttonSeparatorContainer}>
+              <View style={styles.buttonSeparator}></View>
+            </View>
+            <Button onPress={() => navigation.navigate('Registration')}>SIGN UP</Button>
+            <Text style={styles.forgot}>Forgot password?</Text>
+          </View>
+        )}
+      </View>
+    </ImageBackground>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    display: 'flex',
-    alignItems: 'center',
-    paddingTop: 40,
-    backgroundColor: '#ff5722',
-    backgroundColor: '#ff5722',
-  },
-  form: {
-    width: 300,
-  },
-  input: {
-    width: '100%',
-    padding: 10,
-    fontSize: 20,
-    borderColor: '#ececec',
-    borderRadius: 5,
-    borderWidth: 1,
-    marginBottom: 10,
-    backgroundColor: '#fff',
-    marginBottom: 20,
-  },
-  label: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    marginBottom: 6,
-    color: '#fff',
-  },
-  button: {
-    width: '100%',
-    borderRadius: 5,
-    backgroundColor: '#fff',
-    padding: 10,
-    display: 'flex',
-    alignItems: 'center',
-    marginTop: 20,
-  },
-});

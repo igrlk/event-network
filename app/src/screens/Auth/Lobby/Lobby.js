@@ -1,39 +1,21 @@
-import React, { useState, useEffect } from 'react';
-import { View, StyleSheet, ActivityIndicator } from 'react-native';
+import React, { useEffect } from 'react';
+import { View, StyleSheet, ActivityIndicator, ImageBackground } from 'react-native';
 
-import Button from '@components/Button';
 import { checkForToken } from '@utilities/token';
 import { resetNavigation } from '@utilities/navigator';
+import authBackground from '@images/backgrounds/auth.jpg';
 
-export default function Lobby({ navigation }) {
-  const [isCheckingForToken, setIsCheckingForToken] = useState(true);
+export default function Lobby() {
   useEffect(() => {
-    checkToken();
-
-    async function checkToken() {
-      if (await checkForToken()) {
-        resetNavigation('Home');
-      } else {
-        setIsCheckingForToken(false);
-      }
-    }
+    checkForToken().then(res => resetNavigation(res ? 'Home' : 'Login'));
   }, []);
 
   return (
-    <View style={styles.container}>
-      <View style={styles.containerInner}>
-        {isCheckingForToken ? (
-          <ActivityIndicator />
-        ) : (
-          <>
-            <Button onPress={() => navigation.navigate('Login')} style={styles.button}>
-              Log in
-            </Button>
-            <Button onPress={() => navigation.navigate('Registration')}>Sign up</Button>
-          </>
-        )}
+    <ImageBackground source={authBackground} style={{ width: '100%', height: '100%' }}>
+      <View style={styles.container}>
+        <ActivityIndicator />
       </View>
-    </View>
+    </ImageBackground>
   );
 }
 
@@ -43,10 +25,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     alignItems: 'center',
     paddingTop: 40,
-    backgroundColor: '#ff5722',
-  },
-  containerInner: {
-    width: 300,
+    backgroundColor: '#fff',
   },
   button: {
     marginBottom: 10,

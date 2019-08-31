@@ -8,6 +8,7 @@ import Home from '@screens/Home';
 
 import { removeToken } from '@utilities/token';
 
+// removeToken();
 const AppStackNavigator = createStackNavigator(
   {
     Lobby,
@@ -18,6 +19,11 @@ const AppStackNavigator = createStackNavigator(
   {
     initialRouteName: 'Lobby',
     ref: setNavigatorContainer,
+    transitionConfig: () => ({
+      transitionSpec: {
+        duration: 0,
+      },
+    }),
   },
 );
 

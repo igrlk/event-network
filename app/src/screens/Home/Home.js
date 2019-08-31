@@ -13,8 +13,9 @@ export default function Home({ navigation }) {
     async function loadEvents() {
       setIsLoading(true);
       try {
-        setEvents(await getEvents());
-        console.log(events);
+        const newEvents = await getEvents();
+        setEvents(newEvents);
+        console.log(newEvents);
       } catch (ex) {
         console.log(ex);
       } finally {
@@ -75,12 +76,6 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   button: {
-    width: '100%',
-    borderRadius: 5,
-    backgroundColor: '#fff',
-    padding: 10,
-    display: 'flex',
-    alignItems: 'center',
     marginBottom: 20,
   },
   youCanText: {

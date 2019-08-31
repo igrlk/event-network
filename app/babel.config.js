@@ -11,6 +11,7 @@ module.exports = {
           '@api': './src/library/api',
           '@components': './src/library/common/commonComponents',
           '@utilities': './src/library/utilities',
+          '@images': './src/resources/images',
         },
       },
     ],
